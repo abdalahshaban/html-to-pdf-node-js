@@ -27,7 +27,6 @@ const port = process.env.PORT || 3000;
 
 
 app.get('/', async (req, res) => {
-  res.render(`index`);
   await loadBlockChainData();
   await listOfTasks();
   let data = await createTask();
@@ -41,17 +40,17 @@ app.get('/', async (req, res) => {
   content = content.replace('{{author}}', data.author)
   content = content.replace('{{isDone}}', data.isDone)
 
+  res.render(`index`);
 
   let htmlToPdfOptions = {
     type: 'pdf',
     height: '650px',
-    // width: '850px',
-    renderDelay: 2000,
+    width: '750px',
+    renderDelay: 1000,
     "base": `${req.protocol}://${req.get('host')}`,
-    // "format": "A4",
     "orientation": "portrait",
-    "dpi": 200,
-    "quality": 80,
+    // "dpi": 200,
+    "quality": 100,
     "border": {
       "left": "1cm",
       "right": "1cm",
