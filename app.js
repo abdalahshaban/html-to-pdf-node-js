@@ -80,7 +80,7 @@ app.get('/', async (req, res) => {
 
 
 const loadBlockChainData = async () => {
-  web3 = new Web3(new Web3.providers.WebsocketProvider("HTTP://127.0.0.1:7545"));
+  web3 = new Web3(new Web3.providers.WebsocketProvider("HTTP://127.0.0.1:8545"));
   const id = await web3.eth.net.getId();
   let TODO_LIST_ADDRESS = networks[id].address;
 
@@ -127,6 +127,7 @@ const createTask = async () => {
 
 
   const receipt = await todoListApi.methods.createTask(`content${contentNum}`, `author${authorNum}`).send({ from: account, gas: 6721975, gasPrice: '30000000' });
+  console.log(receipt, 'receipt');
   let from = receipt.from;
   let to = receipt.to;
   let transactionHash = receipt.transactionHash;
